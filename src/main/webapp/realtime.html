@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Twitter & Transport</title>
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/morris.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="lib/font-awesome-4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="lib/metisMenu/metisMenu.min.css"/>
+    <!--for bootstrap tab addon-->
+    <script src="lib/jquery-1.11.1.js"></script>
+    <!--morris-->
+    <script src="lib/morris/raphael-min.js"></script>
+    <script src="lib/morris/morris.min.js"></script>
+    <!--google map lib-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+</head>
+<body onload="realtime_main();">
+<!-- Navigation -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Twitter & Transport</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/darcular/TwitterProject" target="_blank"><span class="fa fa-github"></span> GitHub</a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=100005320831199" target="_blank"><span class="glyphicon glyphicon-user"></span> Author</a></li>
+                <li><a href="index.html#help" target="_blank"><span class="fa fa-question"></span> Help</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- bar -->
+        <div class="col-md-3 sidebar navbar">
+            <ul class="nav nav-sidebar" id = "stacked-menu">
+                <li><a href="index.html"><span class="fa fa-home fa-fw"></span> Overview</a></li>
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistic View<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li class="active"><a href="statistic_date.html">View Date</a></li>
+                        <li><a href="statistic_dayOfWeek.html">VIew Day of Week</a></li>
+                    </ul>
+                </li>
+                <li class="active"><a href="realtime.html"><span class="fa fa-eye fa-fw"></span> Real Time</a></li>
+            </ul>
+        </div>
+        <!--Main Content -->
+        <div class="col-md-21 col-md-offset-3 main">
+            <div class="col-md-20" id="realTime_mid">
+                <!--map-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="glyphicon glyphicon-map-marker"></i> Real time tweets in Map (with GPS located)
+                        <div class="pull-right">
+                            <div><span class="panel-label"></span></div>
+                        </div>
+                    </div>
+                    <div class="panel-body" style="padding: 0px;">
+                        <div id="map_canvas" style="width: 100% ; height: 500px"></div>
+                        <div id="legend" style="text-align: center"><span style="color: crimson">Red</span>: Traffic Irrelevant. &nbsp;<span style="color: green">Green</span>: Traffic Relevant. &nbsp;<span style="color: purple;">Purple</span>: Custom keywords Relevant.</div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-comment"></i> Real time tweets in Melbourne
+                        <div class="pull-right">
+                            <div><span class="panel-label"></span></div>
+                        </div>
+                    </div>
+                    <div class="panel-body" style="padding: 15px;">
+                        <div id="msg_area" style="width: 100% ; height: 300px; word-wrap: break-word; word-break: normal;overflow-y:scroll">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--real time spline-->
+            <div class="col-md-4" id="selectionBar">
+                <div class="col-md-offset-1">
+                    <p>RealTime Status: <span id="serviceStatus">OFF</span></p>
+
+                </div>
+                <div id="splineChart" style="margin: 0; height: 200px;"></div>
+                <label for="splineChart" style="font-size: 12px;">Totally: <span id="totalTweetsCounter">0</span> tweets</label>
+                <hr/>
+                <label for="queryInput">Custom keywords filter</label>
+                <div class="input-group" id="queryGroup">
+                    <input type="text" class="form-control" id="queryInput">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="queryCheckBox">
+                    </span>
+                </div>
+                <div style="margin-top: 15px;">
+                    <button type="button" class="btn btn-warning" id="removeCustomMarkers">Remove Custom Markers</button>
+                </div>
+        </div>
+    </div>
+</div>
+<!--bootstrap core script-->
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<!--time picker-->
+<script src="lib/bootstrap-datetimepicker.js"></script>
+<script src="lib/metisMenu/metisMenu.min.js"></script>
+<!--highcharts-->
+<script src="lib/highcharts/highcharts.js"></script>
+<script src="lib/highcharts/exporting.js"></script>
+<!--custom js-->
+<script src="js/template.js"></script>
+<script src="js/realtime.js"></script>
+</body>
+</html>

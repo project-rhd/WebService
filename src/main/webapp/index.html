@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Twitter & Transport</title>
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/morris.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="lib/font-awesome-4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="lib/metisMenu/metisMenu.min.css"/>
+    <!--for bootstrap tab addon-->
+    <script src="lib/jquery-1.11.1.js"></script>
+    <!--morris-->
+    <script src="lib/morris/raphael-min.js"></script>
+    <script src="lib/morris/morris.min.js"></script>
+    <!--google map lib-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+</head>
+<body onload="index_main();">
+<!-- Navigation -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Twitter & Transport</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/darcular/TwitterProject" target="_blank"><span class="fa fa-github"></span> GitHub</a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=100005320831199" target="_blank"><span class="glyphicon glyphicon-user"></span> Author</a></li>
+                <li><a href="#help"><span class="fa fa-question"></span> Help</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar navbar">
+            <ul class="nav nav-sidebar" id = "stacked-menu">
+                <li class="active"><a href="index.html"><span class="fa fa-home fa-fw"></span> Overview</a></li>
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Statistic View<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li class="active"><a href="statistic_date.html">View Date</a></li>
+                        <li><a href="statistic_dayOfWeek.html">VIew Day of Week</a></li>
+                    </ul>
+                </li>
+                <li><a href="realtime.html"><span class="fa fa-eye fa-fw"></span> Real Time</a></li>
+            </ul>
+        </div>
+        <!--Main Content -->
+        <div class="col-md-21 col-md-offset-3 main" style="padding-left: 70px; padding-right: 70px;">
+
+            <h1>Overview</h1>
+
+            <blockquote>
+                <p>This is the Web interface of my Distributed Computing Project (COMP90019) in University of Melbourne in Semester 2 2014.</p>
+
+                <p>The project topic is: Exploring Melbourne’s Transport System through Twitter</p>
+
+                <p>Author: Yikai Gong -- yikaig@student.unimelb.edu.au</p>
+            </blockquote>
+            <br/>
+            <h2>Goal:</h2>
+
+            <ul>
+                <li><p>Visualize public transport status based on social media (Twitter) data.</p>
+
+                    <ul><li>Can we identify congestion across the main roads of Melbourne in real-time?</li>
+                        <li>What time, day, route is the best way to commute?</li></ul></li>
+            </ul>
+            <br/>
+            <h2>Data Resources:</h2>
+
+            <ul>
+                <li><p>Twitter – “targeted” real time harvesting via the Twitter API</p></li>
+                <li><p>Public Sector Mapping Agency (PSMA)</p>
+
+                    <ul><li>The definitive geospatial data provider for Australia includes all new roads, new houses etc</li>
+                        <li>PSMA data made available through AURIN (www.aurin.org.au)</li></ul></li>
+            </ul>
+            <br/>
+            <h2>Services:</h2>
+
+            <ul>
+                <li><p>Targeted twitter harvesters (capturing tweets along main roads)</p></li>
+                <li><p>Web services for transport related tweets, clustering, sentiment analysis, …</p></li>
+                <li><p>Front-end visualisation services.</p></li>
+            </ul>
+            <br/>
+            <h2>System Structure</h2>
+            <img src="image/structure.png" alt=""/>
+            <br/>
+            <br/>
+            <h2>Collected Data</h2>
+
+            <ul>
+                <li><p>Tweets in Melbourne: 7259004 records (From 22 September to 20 October)</p></li>
+                <li><p>Tweets on streets (in CBD and some main highway): 25753 records (From 22 September to 20 October)</p></li>
+            </ul>
+            <br/>
+            <h2>Cloud Instance deployment</h2>
+
+            <ul>
+                <li><p>The real time tweets harvester and a tomcat server is deployed in the one of my instances in NeCTAR Research Cloud</p></li>
+                <li><p>Two streets harvesters and the couchDB database are deployed in another instance.</p></li>
+                <li><p>The harvester for collecting tweets in Melbourne is deployed in a third instance.</p></li>
+            </ul>
+            <br/>
+            <a name="help"><h2>Help Info</h2></a>
+
+            <ul>
+                <li><p>This Web service now provides two analysis views. One is for looking at a specific date. Another is for looking at the days of week.</p></li>
+                <li><p>The Real time service is based on Web-socket (<a href="http://caniuse.com/#feat=websockets">Check the browser support</a>). By default, it will highlight tweets that are talking about traffic. User can also define some keywords to filter the tweets through a input form.</p></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+    <!--bootstrap core script-->
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <!--time picker-->
+    <script src="lib/bootstrap-datetimepicker.js"></script>
+    <script src="lib/metisMenu/metisMenu.min.js"></script>
+    <!--custom js-->
+    <script src="js/template.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
