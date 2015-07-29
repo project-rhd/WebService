@@ -1,11 +1,10 @@
-package webSocket;
+package yikaig.webSocket;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 /**
