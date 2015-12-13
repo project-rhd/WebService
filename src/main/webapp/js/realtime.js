@@ -55,7 +55,15 @@ function handleIncommingTweet(tweetJson){
         var position = new google.maps.LatLng(coordinates[0], coordinates[1]);
         var options;
         var marker;
-        if(isTrafficRelated(tweetJson.text)){
+        if (tweetJson.onStreet==true){
+            options = {
+                position: position,
+                icon: circleBlue
+            }
+            marker = new google.maps.Marker(options);
+            marker.color = 'blue';
+        }
+        else if(isTrafficRelated(tweetJson.text)){
             options = {
                 position: position,
                 icon: circleGreen
@@ -86,10 +94,12 @@ function handleIncommingTweet(tweetJson){
             markerToBeRemoved.setMap(null);
             markers.shift();
         }
+        // The red director
         directiveMarker.setPosition(position);
         directiveMarker.setMap(map);
     }
-    console.log(tweetJson.text + "   id: " + tweetId);
+    console.log(tweetJson.onStreet)
+    //console.log(tweetJson.text + "   id: " + tweetId);
     appendTweetsIntoMsgArea(tweetJson);
 }
 
@@ -122,10 +132,10 @@ var circleGreen2 ={
 
 var circle2 ={
     path: google.maps.SymbolPath.CIRCLE,
-    fillColor: 'blue',
+    fillColor: 'crimson',
     fillOpacity: 1.2,
     scale: 6.5,
-    strokeColor: 'blue',
+    strokeColor: 'crimson',
     strokeWeight: 1
 };
 
@@ -144,6 +154,23 @@ var circlepurple2 ={
     fillOpacity: 0.9,
     scale: 6.5,
     strokeColor: 'purple',
+    strokeWeight: 1
+};
+
+var circleBlue ={
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: 'blue',
+    fillOpacity: 0.9,
+    scale: 3,
+    strokeColor: 'blue',
+    strokeWeight: 1
+};
+var circleBlue2 ={
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: 'blue',
+    fillOpacity: 0.9,
+    scale: 6.5,
+    strokeColor: 'blue',
     strokeWeight: 1
 };
 
@@ -176,6 +203,9 @@ function addlistenerToMarker(marker, tweetJson, map){
     }else if(marker.color && marker.color=='purple'){
         google.maps.event.addListener(marker, "mouseover", function (e) { marker.setIcon(circlepurple2); });
         google.maps.event.addListener(marker, "mouseout", function (e) { marker.setIcon(circlePurple); });
+    }else if(marker.color && marker.color=='blue'){
+        google.maps.event.addListener(marker, "mouseover", function (e) { marker.setIcon(circleBlue2); });
+        google.maps.event.addListener(marker, "mouseout", function (e) { marker.setIcon(circleBlue); });
     }
 
 }
